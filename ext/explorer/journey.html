@@ -1,0 +1,112 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="./assets/css/global.css" />
+    <link rel="stylesheet" href="./assets/leaflet_0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="./assets/jquery-ui.js_1.11.4/jquery-ui.css">
+</head>
+<body onload="journey_onLoad()">
+    <div id="params_div"></div>
+    <form id="form1">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Navitia Explorer</a>
+            </div>
+            <div id="menu_div">    </div>
+          </div>
+        </nav>        
+        <input type="hidden" id="forbidden_uris" name="forbidden_uris" value="">
+        <div id="content" >
+            <h1 style="text-align:center;padding:0px;margin:0px">Recherche/diagnostique d'itinéraire</h1>
+            <div id="params1" style="margin:0px;padding:0px;">
+                <table>
+                    <tr>
+                        <td width="310px">
+                            <label for="from_text">Départ : </label>
+                            <input id="from_text" name="from_text" type="text">      <input id="from" name="from" type="hidden"> 
+                            <label for="to_text">Arrivée : </label>
+                            <input id="to_text" name="to_text" type="text">      <input id="to" name="to" type="hidden"> 
+                        </td>
+                        <td  valign="top">
+                            date : <input type="texte" id="date" name="date" size="5"><br>
+                            heure : <input type="texte" id="time" name="time" size="1"><br>
+                        </td>
+                        <td  valign="top">
+                            Partir après<input type="radio" id="datetime_represents_d" name="datetime_represents" value="departure" checked="true"><br>
+                            Arriver avant<input type="radio" id="datetime_represents_a" name="datetime_represents" value="arrival">
+                        </td>
+                    </tr>
+                </table>
+                <h3 id="toggle_other_params">Paramètres avancés</h3>                            
+                <table id="other_params" hidden>
+                    <tr>
+                        <td valign="top"  style="font-size:10px">
+                            Durée d'accroche (min) : <input type="text" name="max_duration_to_pt" id="max_duration_to_pt" style="width:25px"><br>
+                            Au moins <select name="min_nb_journeys" id="min_nb_journeys">
+                                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                            </select> itinéraire(s)<br>
+                            Afficher tous les itinéraires (debug)<input type="checkbox" name="debug" id="debug"><br>
+                        </td>
+                        <td valign="top" style="font-size:10px">
+                            <input type="checkbox" name="first_section_mode" id="first_section_mode_walking" value="walking">Depart à pied<br>
+                            <input type="checkbox" name="first_section_mode" id="first_section_mode_bike" value="bike">Depart à vélo<br>
+                            <input type="checkbox" name="first_section_mode" id="first_section_mode_bss" value="bss">Depart en VLS<br>
+                            <input type="checkbox" name="first_section_mode" id="first_section_mode_car" value="car">Depart en voiture<br>
+                        </td>
+                        <td valign="top" style="font-size:10px">
+                            <input type="checkbox" name="last_section_mode" id="last_section_mode_walking" value="walking">Arrivée à pied<br>
+                            <input type="checkbox" name="last_section_mode" id="last_section_mode_bike" value="bike">Arrivée à vélo<br>
+                            <input type="checkbox" name="last_section_mode" id="last_section_mode_bss" value="bss">Arrivée en VLS<br>
+                            <input type="checkbox" name="last_section_mode" id="last_section_mode_car" value="car">Arrivée en voiture<br>
+                        </td>
+                        <td valign="top"  style="font-size:10px">
+                            Profil <input type="text" name="traveler_type" id="traveler_type" value=""><br>
+                            Scenario <input type="text" name="custom_scenario" id="custom_scenario" value=""><br>
+                            Fraicheur des données <select name="data_freshness" id="data_freshness">
+                                <option selected></option><option>base_schedule</option><option>adapted_schedule</option><option>realtime</option>
+                            </select>
+                        </td>
+                        <td  valign="top"  style="font-size:10px">
+                            meta-système <input type="checkbox" id="metasystem" name="metasystem" value="on"> <br>
+                            token méta-système: <input type="text" id="metasystem_token" name="metasystem_token">
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td colspan="3" align="center">
+                            <input type="button" value="Recherche (F9)" onclick="document.forms[0].submit();"> &nbsp;
+                            <input type="button" value="Partir lundi à 9h (F10)" onclick="submit_monday_search();">
+                            <div name="journey_url" id="journey_url" style="display:inline;font-size:10px"></div><br>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <table width="100%" height="500px" border="1">
+                <tr>
+                    <td width="50%" valign="top">
+                <div id="journeys"></div>
+                    </td>
+                    <td width="50%">
+                <div id="map-canvas"  style="height: 100%"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <div id="footer" class="footer">
+        github: <a href="https://github.com/canaltp/navitia-explorer">canaltp/navitia-explorer</a><br/>            
+        <a href="http://www.navitia.io/"><img src='./assets/img/Navitia_logo.png'></a>
+        <a href="http://www.canaltp.fr/"><img src='./assets/img/canaltp_logo.png' ></a>
+    </div>    
+    <script type="text/javascript" src="./assets/jquery/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="./assets/jquery-ui.js_1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="./assets/leaflet_0.7.7/leaflet.js"></script>
+    <script type="text/javascript" src="./assets/js/shortcut.js"></script>
+    <script type="text/javascript" src="./assets/js/menu.js"></script>
+    <script type="text/javascript" src="./assets/js/lib.js"></script>
+    <script type="text/javascript" src="./assets/js/conversion.js"></script>
+    <script type="text/javascript" src="./assets/js/journey.js"></script>
+</body>
+</html>

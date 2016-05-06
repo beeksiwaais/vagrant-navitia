@@ -1,0 +1,53 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="./assets/css/global.css" />
+    <link rel="stylesheet" href="./assets/leaflet_0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="./assets/jquery-ui.js_1.11.4/jquery-ui.css" />
+</head>
+<body onload="ptref_onLoad();">
+    <header>
+        <div id="params_div"></div>
+        <form name="form">
+            <nav id="menu_div"></nav>
+            <input type="hidden" id="uri" name="uri" value="">
+        </form>
+    </header>
+
+    <div>
+        <h1>Exploration des données</h1>
+        <h2>
+            <a href="#" onclick="changeURI('/networks/','', '')"> Réseaux </a>-
+            <a href="#" onclick="changeURI('/contributors/','', '')"> Contributeurs </a>-
+            <a href="#" onclick="changeURI('/commercial_modes/','', '')"> Modes commerciaux </a> -
+            <a href="#" onclick="changeURI('/physical_modes/','', '')"> Modes physiques </a> -
+            <a href="#" onclick="changeURI('/poi_types/','', '')"> POIs </a> -
+            <a href="#" onclick="changeURI('/calendars/','', '')"> Calendriers </a> -
+            <a href="#" onclick="changeURI('/traffic_reports/','', '')"> État du trafic </a>  
+        </h2>    
+
+        <div id="ariane_content">Ariane : <div id="ariane" style="display:inline;"></div></div>
+        <div id="content">
+            <section class="first_half">
+                <div id="ptref_content"></div>
+            </section><!--
+            do not remove !
+            --><section class="second_half">
+              <div id="map-canvas" class="map-canvas"></div>
+            </section>
+        </div>
+    </div>
+    <footer id="footer" class="footer">
+        github: <a href="https://github.com/canaltp/navitia-explorer">canaltp/navitia-explorer</a><br/>            
+        <a href="http://www.navitia.io/"><img src='./assets/img/Navitia_logo.png'></a>
+        <a href="http://www.canaltp.fr/"><img src='./assets/img/canaltp_logo.png' ></a>
+    </footer>    
+    <script type="text/javascript" src="./assets/jquery/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="./assets/jquery-ui.js_1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="./assets/leaflet_0.7.7/leaflet.js"></script>
+    <script type="text/javascript" src="./assets/js/menu.js"></script>
+    <script type="text/javascript" src="./assets/js/lib.js"></script>
+    <script type="text/javascript" src="./assets/js/conversion.js"></script>
+    <script type="text/javascript" src="./assets/js/ptref.js"></script>
+</body>
+</html>

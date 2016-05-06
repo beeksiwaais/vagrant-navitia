@@ -1,0 +1,44 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="./assets/css/global.css" />
+    <link rel="stylesheet" href="./assets/leaflet_0.7.7/leaflet.css" />
+</head>
+<body onload="route_schedule_onLoad();">
+    <div id="params_div"></div>
+    <form id="form1">
+        <div id="menu_div">    </div>
+        <h1>Fiche horaire de ligne</h1>
+        <div id="params">
+            <div id="network_div" style="display:inline;"></div>
+            <div id="line_div" style="display:inline;"></div>
+            <div id="route_div" style="display:inline;"></div><br>
+            date : <input type="texte" id="date" name="date" size="5"> 
+            heure : <input type="texte" id="heure" name="heure" size="1">
+            <input type="button" value="Rechercher" onclick="document.forms[0].submit();">
+        </div>
+    </form>
+    <div id="content">
+        <table width="100%" height="500px" border="1">
+            <tr>
+                <td width="50%" valign="top"  style="overflow:scroll;">
+                    <div id="route_schedules_div" style="width:50%;"></div>
+                </td>
+                <td width="50%">
+                    <div id="map-canvas"  style="width:100%;height: 100%"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="footer" class="footer">
+        github: <a href="https://github.com/canaltp/navitia-explorer">canaltp/navitia-explorer</a><br/>            
+        <a href="http://www.navitia.io/"><img src='./assets/img/Navitia_logo.png'></a>
+        <a href="http://www.canaltp.fr/"><img src='./assets/img/canaltp_logo.png' ></a>
+    </div>    
+    <script type="text/javascript" src="./assets/jquery/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="./assets/leaflet_0.7.7/leaflet.js"></script>
+    <script type="text/javascript" src="./assets/js/lib.js"></script>
+    <script type="text/javascript" src="./assets/js/menu.js"></script>
+    <script type="text/javascript" src="./assets/js/route_schedules.js"></script>
+</body>
+</html>

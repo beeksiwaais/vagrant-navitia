@@ -1,0 +1,15 @@
+version: '2'
+services:
+  navitia:
+    image: navitia/debian8_simple
+    ports:
+      - "8081:80"
+    volumes:
+      - /tmp/data:/srv/ed/data
+  explorer:
+    build: ./ext/explorer
+    command: python -m http.server
+    ports:
+      - "8082:8000"
+    volumes:
+      - .:/code
