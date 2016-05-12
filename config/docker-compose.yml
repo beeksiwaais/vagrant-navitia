@@ -5,11 +5,14 @@ services:
     ports:
       - "8081:80"
     volumes:
-      - /tmp/data:/srv/ed/data
+      - /home/vagrant/data:/srv/ed/data
+      - /tmp/log/tyr:/var/log/tyr
+      - /tmp/log/kraken:/var/log/kraken
+      - /tmp/log/jormungandr:/var/log/jormungandr
   explorer:
     build: ../ext/explorer
     command: python -m http.server
     ports:
       - "8082:8000"
     volumes:
-      - .:/code
+      - ../ext/explorer:/code

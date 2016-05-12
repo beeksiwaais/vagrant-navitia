@@ -12,8 +12,9 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision :docker
-  config.vm.provision :shell, inline: "mkdir -m 777 -p /tmp/data/default"
+  config.vm.provision :shell, inline: "mkdir -m 777 -p /home/vagrant/data/default && mkdir -m 777 -p /tmp/log/jormungandr && mkdir -m 777 -p /tmp/log/kraken && mkdir -m 777 -p /tmp/log/tyr"
+  config.vm.provision :shell, inline: "rm -Rf /home/vagrant/data/default/backup"
   config.vm.provision :docker_compose, yml: "/vagrant/config/docker-compose.yml", rebuild: true, run: "always"
-  config.vm.provision :shell, inline: "cp -R /vagrant/config/data/* /tmp/data/default"
+  config.vm.provision :shell, inline: "cp -R /vagrant/config/data/* /home/vagrant/data/default"
 
 end
